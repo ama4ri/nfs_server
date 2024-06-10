@@ -15,10 +15,9 @@
   include_tasks: config.yml
   when: state == 'present' or state == 'latest'
 
-
-- name: Create a dir if it does not exist
+- name: Create dir if it does not exist
   ansible.builtin.file:
-   path: "{{ filesystems.dir }}"
-  state: directory
-  with_items: "{{ filesystems }}"
-  whem: nfs_create_dir == true
+    path: "{{ item.dir }}"
+    state: directory
+  with_items: "{{ nfs_shares }}"
+  when: nfs_create_dir == true

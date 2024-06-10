@@ -1,4 +1,4 @@
-- name: stop nfs server
+- name: stop NFS server
   ansible.builtin.systemd_service:
     name: nfs-server
     state: stopped
@@ -9,7 +9,7 @@
     state: stopped
   when: nfs_version == 3
 
-- name: delete nfs server config
+- name: delete NFS server config
   ansible.builtin.file:  
     path: /etc/exports
     state: absent

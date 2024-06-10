@@ -16,12 +16,13 @@ You MUST set these variables. The role does not work without it!:
 
 The main thing is to define NFS server shares:
 ```
-filesystems:
+# Example:
+nfs_shares:
   - dir: /opt/nfs/
     networks:
-      - net: 192.168.20.0/24
+      - net: 192.168.0.0/24
         options: "rw,sync,fsid=1"
-      - net: 192.168.44.0/24
+      - net: 172.30.10.0/24
         options: "rw,sync,fsid=1"
 ```
 ### Default
@@ -32,17 +33,17 @@ state: present
 nfs_version: 4
 nfs_create_dir: false
 ```
-[] nfs_version:
+- [ ] nfs_version:
     It has two options:
     - 3
     - 4
 
-[] nfs_create_dir: false
+- [ ] nfs_create_dir: false
 
-[] state:
+- [ ] state:
     It has two optiosn:
-    - present - to install and config NFS client services
-    - absent - to remove services
+    - present - to install and config NFS servers
+    - absent - to remove services and configs
 
 ### Permanent
 

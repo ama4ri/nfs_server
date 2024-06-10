@@ -1,20 +1,11 @@
 - set_fact:
-    full_package_list: "{{ rhel_packages_list + package_list }}"
-  when: 
-    - package_list is defined 
-    - ansible_facts['os_family']|lower == 'redhat'
+    full_packages_list: "{{ rhel_packages_list + packages_list|default([]) }}"
 
 - set_fact:
-    full_package_list: "{{ debian_packages_list + package_list }}"
-  when: 
-    - package_list is defined 
-    - ansible_facts['os_family']|lower == 'debian'
-
-- set_fact:
-    full_package_list: "{{ full_package_list + nfs3_packages }}"
+    full_packages_list: "{{ full_packages_list + nfs3_packages }}"
   when: nfs_version == 3
 
-- name: Install nfs server
+- name: Install/Delete NFS server
   ansible.builtin.yum:
     name: "{{ full_packages_list }}"
     state: "{{ state }}"
