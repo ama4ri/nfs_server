@@ -1,0 +1,24 @@
+- name: import task to prepare to remove NFS server
+  include_tasks: uninstall.yml
+  when: state == 'absent'
+
+- name: Install/Delete NFS packages for Rhel
+  include_tasks: redhat.yml
+  when: ansible_facts['os_family']|lower == 'redhat'
+
+- name: Install/Delete NFS packages for Debian
+  include_tasks: debian.yml
+  when: ansible_facts['os_family']|lower == 'debian'
+  
+
+- name: import task to config NFS server
+  include_tasks: config.yml
+  when: state == 'present' or state == 'latest'
+
+
+- name: Create a dir if it does not exist
+  ansible.builtin.file:
+   path: "{{ filesystems.dir }}"
+  state: directory
+  with_items: "{{ filesystems }}"
+  whem: nfs_create_dir == true

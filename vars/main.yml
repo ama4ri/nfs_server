@@ -1,0 +1,7 @@
+rhel_packages_list:
+  - nfs-utils
+nfs3_packages:
+  - rpcbind
+
+debian_packages_list:
+  - nfs-kernel-server

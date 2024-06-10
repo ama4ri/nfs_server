@@ -1,0 +1,3 @@
+{% for filesystem in filesystems -%}
+{{ filesystem.dir }} {% for item in filesystem.networks -%} {{ item.net -}}({{ item.options -}}) {%endfor%}
+{% endfor %}
