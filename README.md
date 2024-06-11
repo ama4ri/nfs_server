@@ -3,6 +3,7 @@
 ## Description
 
 You can use this role to install and config NFS server
+The role was tested with RedHat.
 
 ## Avaliable variable
 
